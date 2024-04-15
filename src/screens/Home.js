@@ -1,14 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from 'react-native';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { useRef } from 'react';
 
-import HomeScreen from './src/screens/HomeScreen';
-import UserEntry from './src/components/UserEntry';
-import Footer from './src/components/Footer';
-import Header from './src/components/Header';
+import UserEntry from '../components/UserEntry';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
-export default function App() {
+export default function Home() {
+
+ const navigation = useNavigation();
 
   const [users, setUsers] = useState([
     { name: 'Participante A', address: 'Rua Corumbatai,75, Lagoinha', city: "Belo Horizonte", phone: '31 981076125' },
@@ -16,12 +18,10 @@ export default function App() {
     { name: 'Participante C', address: 'Santa Rita Durao ,1000, Funcionários', city: "Belo Horizonte", phone: '31 981076125' },
     // ... adicione mais participantes aqui
   ]);
-
   const handleEditPress = (user) => {
     // Lógica para editar o usuário
     console.log('Editar usuário:', user);
   };
-
   return (
     <View style={{ flex: 1 }}>
       {/* Header */}
