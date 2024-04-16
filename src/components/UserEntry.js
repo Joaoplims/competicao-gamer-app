@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; // Importe o ícone desejado
 
 const UserEntry = ({ user, onEditPress }) => {
+  console.log("user dentro de um UserEntry");
+  console.log(user);
   return (
 
     <View style={styles.container}>

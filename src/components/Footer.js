@@ -8,7 +8,6 @@ import Cadastro from '../screens/Cadastro';
 export default function Footer() {
     let navigation = useNavigation();
     const handleAddEntry = () => {
-        console.log('Indo para a pagina de adicionar ');
         navigation.navigate('Cadastro');
     }
 

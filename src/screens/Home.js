@@ -6,26 +6,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import usersData from '../../UsersData';
+import { useFocusEffect } from '@react-navigation/native';
 
 import UserEntry from '../components/UserEntry';
 
 
 export default function Home() {
 
-  const navigation = useNavigation();
-  const usersArray = usersData;
-  const [users, setUsers] = useState(usersArray);
 
-  console.log(users);
-  useEffect(() => {
-    console.log('O estado count foi atualizado:', users);
-  }, [users]);
+
+  const navigation = useNavigation();
+
+  const [users, setUsers] = useState([]);
+  useFocusEffect(React.useCallback(() => {console.log("Renderizei?");},[fetchUsersData]));
+
+
+
   const handleEditPress = (user) => {
     // Lógica para editar o usuário
     console.log('Editar usuário:', user);
   };
 
+  const fetchUsersData =() =>{
 
+    setUsers(usersData);
+  }
 
   return (
     <View style={{ flex: 1 }}>

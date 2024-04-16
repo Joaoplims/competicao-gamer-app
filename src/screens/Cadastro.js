@@ -7,6 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import CadastroInputField from '../components/CadastroInputField';
 import usersData from '../../UsersData';
 
+
+
+
 export default function Cadastro() {
     let navigation = useNavigation();
 
@@ -46,7 +49,6 @@ export default function Cadastro() {
         };
 
         usersData.push(novaEntrada);
-        console.log(usersData);
        { /*AddEntry(novaEntrada)*/}
         ReturnHome();
     };
