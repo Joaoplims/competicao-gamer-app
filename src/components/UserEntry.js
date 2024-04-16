@@ -4,11 +4,12 @@ import { AntDesign } from '@expo/vector-icons'; // Importe o ícone desejado
 
 const UserEntry = ({ user, onEditPress }) => {
   return (
+
     <View style={styles.container}>
-      <Text style={styles.name}>{user.name}</Text>
+      <Text style={styles.name}>{user.fullName}</Text>
       <Text>{user.address}</Text>
-      <Text>{user.city}</Text>
-      <Text>{user.phone}</Text>
+      <Text>{user.cidade}</Text>
+      <Text>{user.telefone}</Text>
       <TouchableOpacity onPress={() => onEditPress(user)}>
         <AntDesign name="edit" size={18} color="blue" /> 
       </TouchableOpacity>

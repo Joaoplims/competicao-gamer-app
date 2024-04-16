@@ -1,31 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useRef } from 'react';
-
-import UserEntry from '../components/UserEntry';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import usersData from '../../UsersData';
+
+import UserEntry from '../components/UserEntry';
+
 
 export default function Home() {
 
- const navigation = useNavigation();
+  const navigation = useNavigation();
+  const usersArray = usersData;
+  const [users, setUsers] = useState(usersArray);
 
-  const [users, setUsers] = useState([
-    { name: 'Participante A', address: 'Rua Corumbatai,75, Lagoinha', city: "Belo Horizonte", phone: '31 981076125' },
-    { name: 'Participante B', address: 'Rua Santa Clara de Assis,10, Primeiro de Maio', city: "Belo Horizonte", phone: '31 981076125' },
-    { name: 'Participante C', address: 'Santa Rita Durao ,1000, Funcionários', city: "Belo Horizonte", phone: '31 981076125' },
-    // ... adicione mais participantes aqui
-  ]);
+  console.log(users);
+  useEffect(() => {
+    console.log('O estado count foi atualizado:', users);
+  }, [users]);
   const handleEditPress = (user) => {
     // Lógica para editar o usuário
     console.log('Editar usuário:', user);
   };
+
+
+
   return (
     <View style={{ flex: 1 }}>
       {/* Header */}
-      <Header/>
+      <Header />
 
       {/* Body */}
       <ScrollView style={styles.container}>
@@ -69,7 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
 
 
 
