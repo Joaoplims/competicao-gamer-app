@@ -111,10 +111,10 @@ export default function Cadastro() {
     return (
         <ScrollView style={styles.container}>
 
-            <CadastroInputField title={'Primeiro Nome'} value={primeiroNome} callback={setPrimeiroNome} placeholder={'Ex: João'} />
-            <CadastroInputField title={'Segundo Nome'} value={segundoNome} callback={setSegundoNome} placeholder={'Ex: Silveira Lima'} />
-            <CadastroInputField title={'Email'} value={email} callback={setEmail} placeholder={'Ex: joaolima@gmail.com'} />
-            <CadastroInputField title={'telefone'} value={telefone} callback={setTelefone} placeholder={'Ex: 31 99999-9999 '} />
+            <CadastroInputField title={'Primeiro Nome'} value={primeiroNome} callback={setPrimeiroNome} type={'name'} placeholder={'Ex: João'} />
+            <CadastroInputField title={'Segundo Nome'} value={segundoNome} callback={setSegundoNome} type={'name'} placeholder={'Ex: Silveira Lima'} />
+            <CadastroInputField title={'Email'} value={email} callback={setEmail} type={'name'} kbType={'email-address'} placeholder={'Ex: joaolima@gmail.com'} />
+            <CadastroInputField title={'telefone'} value={telefone} callback={setTelefone} type={'phone'} kbType={'phone-pad'} placeholder={'Ex: 31 99999-9999 '} />
 
             {/*<CadastroInputField title={'CEP'} value={cep} callback={setCep} />*/}
             <View style={styles.containerCEP}>
@@ -133,11 +133,11 @@ export default function Cadastro() {
                 </View>
             </View>
 
-            <CadastroInputField title={'Rua'} value={nomeRua} callback={setNomeRua} placeholder={'Digite o nome da rua'} />
-            <CadastroInputField title={'Numero'} value={ruaNumero} callback={setRuaNumero} placeholder={'Digite o número da casa'} />
-            <CadastroInputField title={'Bairro'} value={bairro} callback={setBairro} placeholder={'Digite o nome do bairro'} />
-            <CadastroInputField title={'Cidade'} value={cidade} callback={setCidade} placeholder={'Digite o nome da cidade'} />
-            <CadastroInputField title={'UF'} value={uf} callback={setUf} placeholder={'Digite o nome do estado'} />
+            <CadastroInputField title={'Rua'} value={nomeRua} type={'name'} callback={setNomeRua} placeholder={'Digite o nome da rua'} />
+            <CadastroInputField title={'Numero'} value={ruaNumero} callback={setRuaNumero} type={'number'} kbType={'numeric'} placeholder={'Digite o número da casa'} />
+            <CadastroInputField title={'Bairro'} value={bairro} callback={setBairro} type={'name'} placeholder={'Digite o nome do bairro'} />
+            <CadastroInputField title={'Cidade'} value={cidade} callback={setCidade} type={'name'} placeholder={'Digite o nome da cidade'} />
+            <CadastroInputField title={'UF'} value={uf} callback={setUf} type={'name'} placeholder={'Digite o nome do estado'} />
             <View style={styles.buttonsContainer}>
                 <Button title="Cancelar" onPress={handleCancelar} color="red" />
                 <Button title="Salvar" onPress={handleSalvar} color="green" />
