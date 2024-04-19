@@ -1,7 +1,7 @@
 ## Projeto Final da disciplina de arquitetura de dispositivos mobiles:
 
 ### TODO LIST:
-- Corrigir bugs de validações nos campos de trabalho
+- Corrigir bugs de validações nos campos de cadastro
 - Implementa api de CEP para colher dados de endereço no momento de cadastro
 
 
