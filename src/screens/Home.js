@@ -1,35 +1,59 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Text, StyleSheet,TouchableOpacity, View, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import usersData from '../../UsersData';
 import { useFocusEffect } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons'; // Importe o ícone desejado
 
-import UserEntry from '../components/UserEntry';
 
 
 export default function Home() {
-
-
+  const [users, setUsers] = useState([]);
 
   const navigation = useNavigation();
+  useFocusEffect(React.useCallback(() => {const carregarDados = async () => {
+    try {
+      const dadosArmazenados = await AsyncStorage.getItem('chave');
 
-  const [users, setUsers] = useState([]);
-  useFocusEffect(React.useCallback(() => {console.log("Renderizei?");},[fetchUsersData]));
+      if (dadosArmazenados !== null) {
+        const dadosConvertidos = JSON.parse(dadosArmazenados);
+        setUsers(dadosConvertidos); 
+        //console.log(dadosConvertidos);
+      } else {
+        console.log('Nenhum dado encontrado');
+      }
+    } catch (error) {
+      console.error('Ocorreu um erro ao carregar os dados:', error);
+    }
+  };
 
+  carregarDados();},[fetchUsersData]));
 
+  console.log(usersData);
 
+  async function removeData() {
+    try {
+      const savedUser = await AsyncStorage.clear();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+//  removeData();
   const handleEditPress = (user) => {
     // Lógica para editar o usuário
     console.log('Editar usuário:', user);
+    navigation.navigate('Editar', {user});
   };
 
   const fetchUsersData =() =>{
 
     setUsers(usersData);
+
   }
 
   return (
@@ -39,8 +63,18 @@ export default function Home() {
 
       {/* Body */}
       <ScrollView style={styles.container}>
-        {users.map((user, index) => (
-          <UserEntry key={index} user={user} onEditPress={handleEditPress} />
+      
+
+        {users.map((item, index) => (
+          <View key={index} style={styles.container}>
+          <Text style={styles.name}>{item.fullName}</Text>
+          <Text>{item.email}</Text>
+          <Text>{item.phone}</Text>
+          <Text>{item.cep}</Text>
+          <TouchableOpacity onPress={() => handleEditPress(item)}>
+            <AntDesign name="edit" size={18} color="blue" /> 
+          </TouchableOpacity>
+      </View>
         ))}
       </ScrollView>
 

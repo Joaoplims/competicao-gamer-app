@@ -5,44 +5,42 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import CadastroInputField from '../components/CadastroInputField';
-import usersData from '../../UsersData';
 
 
+export default function Editar({ route, navigation }) {
 
+    const { user } = route.params;
+    console.log(user.fullname);
 
-export default function Cadastro() {
-    let navigation = useNavigation();
-
-    const [primeiroNome, setPrimeiroNome] = useState('');
-    const [segundoNome, setSegundoNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefone, setTelefone] = useState('');
-    const [cep, setCep] = useState('');
-    const [nomeRua, setNomeRua] = useState('');
-    const [ruaNumero, setRuaNumero] = useState('');
-    const [bairro, setBairro] = useState('');
-    const [cidade, setCidade] = useState('');
-    const [uf, setUf] = useState('');
+    const [primeiroNome, setPrimeiroNome] = useState(user.primeiroNome);
+    const [segundoNome, setSegundoNome] = useState(user.segundoNome);
+    const [email, setEmail] = useState(user.email);
+    const [telefone, setTelefone] = useState(user.phone);
+    const [cep, setCep] = useState(user.cep);
+    const [nomeRua, setNomeRua] = useState(user.nomeRua);
+    const [ruaNumero, setRuaNumero] = useState(user.ruaNumero);
+    const [bairro, setBairro] = useState(user.bairro);
+    const [cidade, setCidade] = useState(user.cidade);
+    const [uf, setUf] = useState(user.uf);
 
     const handleCancelar = () => {
         // Lógica para cancelar o cadastro
-        console.log('Cadastro cancelado');
+        console.log("Editar " + user.fullName + "cancelado");
         ReturnHome();
     };
+
 
     const handleSearchCEP = () => {
         // Lógica para buscar o CEP
         console.log('Buscar CEP:', cep);
     };
 
-
-
     const handleSalvar = async () => {
         try {
             let fullname = primeiroNome + ' ' + segundoNome;
             let address = nomeRua + ", " + ruaNumero + ", " + bairro;
-            const novaEntrada = {
-                id: 0,
+            const objetoEditado = {
+                id: user.id,
                 email: email,
                 phone: telefone,
                 cep: cep,
@@ -60,31 +58,24 @@ export default function Cadastro() {
             // Recuperar os dados existentes do AsyncStorage
             const dadosArmazenados = await AsyncStorage.getItem('chave');
             let registrosExistente = [];
-       
+
 
             if (dadosArmazenados !== null && dadosArmazenados !== undefined) {
                 // Convertendo a string de volta para objeto
                 registrosExistente = JSON.parse(dadosArmazenados);
-                console.log(registrosExistente);
+            }
 
-                const lastEntrada = registrosExistente[registrosExistente.length - 1];
-                let lastID = 0;
-                if (lastEntrada !== null || lastEntrada !== undefined) {
-                    //console.log(lastEntrada);
-                    lastID = lastEntrada.id + 1;
-
-                    novaEntrada.id = lastID;
-                    // console.log(">>> Novo Cadastro id: " + novaEntrada.id);
-                    // Adicionar o novo registro ao array existente
+            let usuariosEdit = registrosExistente
+            .map(obj => {
+                if (obj.id === user.id) {
+                  return objetoEditado;
+                } else {
+                  return obj;
                 }
-            }
-            else{
-                novaEntrada.id = 1;
-            }
-            registrosExistente.push(novaEntrada);
+              });
 
             // Convertendo todos os registros para string antes de salvar
-            const todosRegistrosString = JSON.stringify(registrosExistente);
+            const todosRegistrosString = JSON.stringify(usuariosEdit);
 
             // Salvar todos os registros atualizados no AsyncStorage
             await AsyncStorage.setItem('chave', todosRegistrosString);
@@ -111,7 +102,7 @@ export default function Cadastro() {
     return (
         <ScrollView style={styles.container}>
 
-            <CadastroInputField title={'Primeiro Nome'} value={primeiroNome} callback={setPrimeiroNome} placeholder={'Ex: João'} />
+            {<CadastroInputField title={'Primeiro Nome'} value={primeiroNome} callback={setPrimeiroNome} />}
             <CadastroInputField title={'Segundo Nome'} value={segundoNome} callback={setSegundoNome} placeholder={'Ex: Silveira Lima'} />
             <CadastroInputField title={'Email'} value={email} callback={setEmail} placeholder={'Ex: joaolima@gmail.com'} />
             <CadastroInputField title={'telefone'} value={telefone} callback={setTelefone} placeholder={'Ex: 31 99999-9999 '} />
@@ -145,7 +136,6 @@ export default function Cadastro() {
         </ScrollView>
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,

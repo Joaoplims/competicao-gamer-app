@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
 export default function CadastroInputField(props) {
+   // console.log("Dentro do Cadastro InputField: " + props.value );
     return (
         <View style={styles.container}>
             <Text style={styles.label}>{props.title}</Text>
