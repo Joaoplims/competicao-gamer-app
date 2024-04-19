@@ -2,7 +2,7 @@
 
 ### TODO LIST:
 - Corrigir bugs de validações nos campos de cadastro
-- Implementa api de CEP para colher dados de endereço no momento de cadastro
+- Implementar api de CEP para colher dados de endereço no momento de cadastro
 
 
 ### IMPORTANTE!
