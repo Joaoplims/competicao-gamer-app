@@ -1,8 +1,12 @@
 ## Projeto Final da disciplina de arquitetura de dispositivos mobiles:
 
 ### TODO LIST:
-- Finalizar correção na funcionalidade que faz com que os dados cadastrados sejam atualizados na tela de home
-- Finalizar implementação da persistencia de dados usando AsyncStorage
-- Implementar a tela de editar dados do usuário
-- Implementar validações nos campos de trabalho
+- Corrigir bugs de validações nos campos de trabalho
 - Implementa api de CEP para colher dados de endereço no momento de cadastro
+
+
+### IMPORTANTE!
+Na hora que clonar o repositório, antes de executar o projeto pela primeira vez, ir até o arquivo localizado na pasta "competicao-gamer-app\node_modules\expo\AppEntry.js"  e modificar o arquivo de importação da depedencia APP para '../../routes';
+
+### Link para o video de demonstração 
+https://youtu.be/IHsCXF5MVAs
