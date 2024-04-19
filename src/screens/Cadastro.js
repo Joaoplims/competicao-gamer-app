@@ -48,7 +48,7 @@ export default function Cadastro() {
                 cep: cep,
                 cidade: cidade,
                 uf: uf,
-                fullName: fullname,
+                fullName: fullname.trim(),
                 primeiroNome: primeiroNome,
                 segundoNome: segundoNome,
                 address: address,

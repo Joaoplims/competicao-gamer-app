@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Importe o ícone de busca
 
-const Header = () => {
+const Header = (props) => {
+  const [value,setValue] = useState('');
+  const valueChanged = (v) => {
+    setValue(v.trim());
+    props.searchUser(value);
+  }
   return (
     <View style={styles.container}>
       <Ionicons name="search" size={24} color="white" style={styles.icon} />
       <TextInput
         placeholder="Buscar por nome"
         style={styles.input}
+        onChangeText={valueChanged}
         placeholderTextColor="gray"
       />
     </View>

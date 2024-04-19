@@ -13,6 +13,7 @@ import { AntDesign } from '@expo/vector-icons'; // Importe o ícone desejado
 
 export default function Home() {
   const [users, setUsers] = useState([]);
+  const [searchName, setSearchName] = useState('');
 
   const navigation = useNavigation();
   useFocusEffect(React.useCallback(() => {const carregarDados = async () => {
@@ -43,7 +44,7 @@ export default function Home() {
     }
   };
   
-//  removeData();
+ //removeData();
   const handleEditPress = (user) => {
     // Lógica para editar o usuário
     console.log('Editar usuário:', user);
@@ -56,16 +57,20 @@ export default function Home() {
 
   }
 
+  const searchUser= (name) =>{
+    setSearchName(name);
+    console.log(searchName);
+  }
   return (
     <View style={{ flex: 1 }}>
       {/* Header */}
-      <Header />
+      <Header searchUser={searchUser} />
 
       {/* Body */}
       <ScrollView style={styles.container}>
       
 
-        {users.map((item, index) => (
+        {users.filter(user => searchName === '' || user.fullName.includes(searchName.trim())).map((item, index) => (
           <View key={index} style={styles.container}>
           <Text style={styles.name}>{item.fullName}</Text>
           <Text>{item.email}</Text>
